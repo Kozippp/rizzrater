@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Bot, Sparkles, SendHorizontal, Loader2 } from "lucide-react"
+import { Bot, Sparkles, SendHorizontal, Loader2, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -41,31 +41,32 @@ export function RoastForm() {
   }
 
   const getScoreColor = (score: number) => {
-    // Keep colors to show "quality" even if the text is mean
-    if (score < 0) return "text-red-600"
-    if (score < 5) return "text-orange-500"
-    return "text-green-500"
+    if (score < 3) return "text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+    if (score < 7) return "text-orange-400 drop-shadow-[0_0_15px_rgba(251,146,60,0.5)]"
+    return "text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]"
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col gap-10 relative z-10">
+    <div className="w-full max-w-2xl mx-auto flex flex-col gap-8 relative z-10 px-4">
       
       {/* HEADER SECTION */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center space-y-4"
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-center space-y-4 mb-4"
       >
-        <div className="inline-flex items-center justify-center gap-3">
-          <Bot className="w-10 h-10 text-blue-500" />
-          <h1 className="text-4xl md:text-6xl font-sans font-bold text-white tracking-tight drop-shadow-sm">
-            AI Abiline
-          </h1>
-          <Sparkles className="w-8 h-8 text-yellow-400" />
+        <div className="inline-flex items-center justify-center gap-3 p-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 mb-4">
+          <Bot className="w-6 h-6 text-indigo-400" />
+          <span className="text-sm font-medium text-indigo-200/80 uppercase tracking-widest">AI Roast Master</span>
         </div>
-        <p className="text-lg md:text-xl text-gray-400 font-light max-w-lg mx-auto">
-          Sinu isiklik ja professionaalne nõustaja. Küsi mida iganes.
+        
+        <h1 className="text-5xl md:text-7xl font-sans font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/50 pb-2">
+          Roast My Line
+        </h1>
+        
+        <p className="text-lg text-muted-foreground/80 font-light max-w-lg mx-auto leading-relaxed">
+          Julge küsida, julge vastutada. Sinu isiklik AI kriitik ootab.
         </p>
       </motion.div>
 
@@ -75,15 +76,15 @@ export function RoastForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <Card className="bg-white/5 border-white/10 shadow-xl backdrop-blur-md overflow-hidden relative">
-          <CardContent className="p-6 md:p-8">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-              <div className="relative">
+        <Card className="glass-panel border-0 overflow-hidden ring-1 ring-white/10">
+          <CardContent className="p-1">
+            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 p-2">
+              <div className="relative flex-grow group">
                 <Input
-                  placeholder="Kirjuta siia oma küsimus või tekst..."
+                  placeholder="Kirjuta siia midagi..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  className="h-14 px-6 text-lg bg-black/20 border-white/10 focus:border-blue-500/60 text-white placeholder:text-gray-500 rounded-lg transition-all shadow-inner focus-visible:ring-1 focus-visible:ring-blue-500/50"
+                  className="h-14 px-6 text-lg bg-black/40 border-transparent focus:border-indigo-500/50 text-white placeholder:text-gray-600 rounded-xl transition-all focus:bg-black/60 focus-visible:ring-0 focus-visible:ring-offset-0"
                   autoComplete="off"
                   autoFocus
                 />
@@ -92,19 +93,13 @@ export function RoastForm() {
               <Button
                 type="submit"
                 size="lg"
-                className="h-12 w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium tracking-wide rounded-lg shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-14 px-8 bg-indigo-600 hover:bg-indigo-500 text-white text-lg font-medium rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] transition-all duration-300 transform hover:-translate-y-0.5"
                 disabled={loading || !input.trim()}
               >
                 {loading ? (
-                  <div className="flex items-center gap-2">
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Analüüsin...</span>
-                  </div>
+                  <Loader2 className="w-6 h-6 animate-spin" />
                 ) : (
-                  <div className="flex items-center gap-2">
-                    <span>Saada</span>
-                    <SendHorizontal className="w-5 h-5" />
-                  </div>
+                  <SendHorizontal className="w-6 h-6" />
                 )}
               </Button>
             </form>
@@ -117,36 +112,59 @@ export function RoastForm() {
         {result && (
           <motion.div
             key="result"
-            initial={{ opacity: 0, scale: 0.98, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -10 }}
+            initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            exit={{ opacity: 0, filter: "blur(10px)", y: -10 }}
             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-            className="relative"
+            className="relative mt-4"
           >
-            <div className="bg-black/40 border border-white/10 rounded-xl p-8 text-center shadow-2xl relative overflow-hidden backdrop-blur-md">
+            <div className="glass-panel rounded-2xl p-8 md:p-10 text-center relative overflow-hidden group">
               
-              <div className="relative z-10 space-y-6">
+              {/* Decorative background gradients within card */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-indigo-500/20 transition-all duration-700" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:bg-purple-500/20 transition-all duration-700" />
+
+              <div className="relative z-10 flex flex-col items-center gap-6">
                 <div className="flex flex-col items-center gap-2">
-                  <span className="text-xs uppercase tracking-widest text-gray-500 font-semibold">Hinnang</span>
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.2, type: "spring" }}
-                    className={`text-6xl font-bold ${getScoreColor(result.score)}`}
-                  >
-                    {result.score}/10
-                  </motion.div>
+                  <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Hinnang</span>
+                  <div className="flex items-center justify-center relative">
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
+                      className={`text-7xl md:text-8xl font-bold tracking-tighter ${getScoreColor(result.score)}`}
+                    >
+                      {result.score}
+                    </motion.div>
+                    <span className="text-2xl text-muted-foreground/40 absolute -right-6 top-2">/10</span>
+                  </div>
+                  
+                  {/* Star Rating Visual */}
+                  <div className="flex gap-1 mt-2">
+                    {[...Array(10)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3 + (i * 0.05) }}
+                      >
+                        <Star 
+                          className={`w-3 h-3 ${i < result.score ? "fill-white text-white" : "text-white/10"}`} 
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="h-px w-20 mx-auto bg-white/10" />
+                <div className="h-px w-full max-w-[200px] bg-gradient-to-r from-transparent via-white/10 to-transparent my-2" />
 
                 <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mx-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-xl md:text-2xl text-gray-200 font-light leading-relaxed max-w-2xl mx-auto italic"
                 >
-                  {result.roast}
+                  &ldquo;{result.roast}&rdquo;
                 </motion.div>
               </div>
             </div>

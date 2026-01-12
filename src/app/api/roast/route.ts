@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const openai = new OpenAI({ apiKey });
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.5-preview",
+      model: "gpt-5.2",
       messages: [
         {
           role: "system",

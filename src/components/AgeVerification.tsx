@@ -75,12 +75,12 @@ export function AgeVerification({ children }: { children: React.ReactNode }) {
 
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-rose-300 to-pink-200 mb-4">
-                  Age Verification
+                  Vanuse kontroll
                 </h1>
 
                 {/* Description */}
                 <p className="text-pink-200/70 text-lg mb-6 leading-relaxed">
-                  This website contains content intended for adults only. Please confirm that you are 18 years of age or older.
+                  See veebileht sisaldab täiskasvanutele mõeldud sisu. Palun kinnita, et oled vähemalt 18-aastane.
                 </p>
 
                 {/* Disclaimer */}
@@ -88,7 +88,7 @@ export function AgeVerification({ children }: { children: React.ReactNode }) {
                   <div className="flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-pink-200/60 text-left leading-relaxed">
-                      <strong className="text-amber-400/90">Disclaimer:</strong> This website is for entertainment purposes only. The AI-generated roasts are meant to be humorous. We are not responsible for any hurt feelings, damaged egos, or existential crises that may result from using this service. Enter at your own risk!
+                      <strong className="text-amber-400/90">Hoiatus:</strong> See veebileht on mõeldud ainult meelelahutuseks. Tehisintellekti genereeritud roastid on humoorikad. Me ei vastuta haavatud tunnete, purustatud egode ega eksistentsiaalsete kriiside eest, mis võivad selle teenuse kasutamisest tekkida. Sisened omal vastutusel!
                     </p>
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export function AgeVerification({ children }: { children: React.ReactNode }) {
                   >
                     <span className="flex items-center gap-2">
                       <Heart className="w-5 h-5 fill-white/30" />
-                      I am 18 or older
+                      Olen 18 või vanem
                     </span>
                   </Button>
                   
@@ -110,13 +110,13 @@ export function AgeVerification({ children }: { children: React.ReactNode }) {
                     variant="outline"
                     className="flex-1 h-14 text-lg font-semibold bg-transparent border-rose-500/30 text-rose-200/70 hover:bg-rose-500/10 hover:text-rose-200 rounded-xl transition-all duration-300"
                   >
-                    Leave
+                    Lahku
                   </Button>
                 </div>
 
                 {/* Footer note */}
                 <p className="text-xs text-pink-200/30 mt-6">
-                  By entering, you agree to our terms and acknowledge the disclaimer above.
+                  Sisenedes nõustud meie tingimustega ja võtad teadmiseks ülaltoodud hoiatuse.
                 </p>
               </CardContent>
             </Card>

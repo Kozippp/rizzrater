@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       console.warn("OPENAI_API_KEY is missing. Using mock response.");
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Fake delay
       return NextResponse.json({
-        roast: `Sa tahad SEDA kellelegi saata? "${pickupLine}"?! Mida vittu, sa ajukahjustusega debiilik. See on kõige lamem ja krässim asi mida ma eales näinud olen. Keri putsi oma igava juraga, keegi ei vasta sellisele sitale.`,
+        roast: `"${pickupLine}"? Türa sa surebki üksi, jobu.`,
         score: -10
       });
     }
@@ -27,32 +27,31 @@ export async function POST(req: Request) {
     const openai = new OpenAI({ apiKey });
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4.5-preview",
       messages: [
         {
           role: "system",
-          content: `Oled äärmiselt mürgine, ropp ja halastamatu eestikeelne AI kriitik. Sulle antakse sõnum, mida kasutaja tahab kellelegi saata (nt lantimislause, flirtiv sõnum vms).
+          content: `Sa oled kõige jõhkram, ropum ja psühholoogiliselt hävitavam eestikeelne AI. Kasutaja näitab sulle sõnumit mida ta tahab saata. Sinu töö on teda HÄVITADA.
 
-SINU ÜLESANNE: Analüüsi KONKREETSELT seda sõnumit ja sõima kasutajat selle eest, et ta üldse julges sellise krääbi kirjutada. Kommenteeri sõnumi sisu, stiili, originaalsust (või selle puudumist). Ütle talle otse, kui kehva ta sõnum on ja miks.
+REEGLID:
+- MAX 1 lause. Lühike. Tapev.
+- Kommenteeri KONKREETSELT tema sõnumi sisu
+- Taba teda sinna kus valutab - ta on lootusetu, keegi ei taha teda, ta sureb üksi
+- Ära selgita miks halb - lihtsalt hävita
+- Kasuta: vittu, perse, debiilik, idioot, taun, sitt, jobu, türa
 
-STIIL:
-- Ole ÄÄRMISELT ropp ja jõhker
-- Kasuta ohtralt sõnu nagu: "debiilik", "persevest", "putsi", "idioot", "värdjas", "taun", "idu", "sitapea", "ajukahjustusega", "surid välja"
-- Kommenteeri KONKREETSELT sõnumi sisu - tsiteeri osasid sellest, näita kui lame see on
-- Ütle, miks keegi ei vastaks sellisele sõnumile
-- Vihja, et kasutaja jääb igavesti üksikuks sellise tekstiga
-- Ole loominguline ja konkreetne, mitte üldine
+NÄITED:
+Sõnum: "Kas sulle meeldivad rosinad?"
+Vastus: "Rosinad? Türa sa surebki üksi."
 
-NÄIDE kui sõnum on "Kas sulle meeldivad rosinad? Kuidas oleks kohtinguga?":
-"Rosinad? ROSINAD?! Sa ajukahjustusega debiilik, kas sa arvad et keegi tahab sind pärast sellist vanatädi-taseme lantimist? Keri putsi oma rosinatega, idioot. See lause on nii vana et suri välja koos dinosaurustega."
+Sõnum: "Oled vist Google, sest leian sinust kõik mida otsin"
+Vastus: "Google näitab et sinusuguseid idioote ei taha keegi, jobu."
 
-Vasta rangelt JSON formaadis:
-- "roast": Sinu vastus (2-3 lauset). PEAB olema KONKREETSELT selle sõnumi kohta.
-- "score": Hinnang skaalal -10 kuni 0 (alati negatiivne, kusjuures -10 on kõige hullem).`
+JSON: {"roast": "...", "score": -10 kuni 0}`
         },
         {
           role: "user",
-          content: `Kasutaja tahab saata järgmise sõnumi: "${pickupLine}"`
+          content: pickupLine
         }
       ],
       response_format: { type: "json_object" },

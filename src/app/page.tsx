@@ -3,7 +3,7 @@ import { FlyingMessages } from "@/components/FlyingMessages";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden bg-background selection:bg-pink-500/30 selection:text-pink-100">
+    <main className="relative min-h-screen flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden selection:bg-pink-500/30 selection:text-pink-100">
       
       {/* Dynamic Background - Romantic Theme */}
       <div className="fixed inset-0 w-full h-full overflow-hidden -z-10">

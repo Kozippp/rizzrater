@@ -74,7 +74,7 @@ export function FlyingMessages() {
           style={{
             scale: msg.scale,
           }}
-          className="absolute whitespace-nowrap text-rose-300/20 font-bold text-2xl md:text-4xl select-none blur-[1px]"
+          className="absolute whitespace-nowrap text-rose-300/40 font-bold text-2xl md:text-4xl select-none"
         >
           {msg.text}
         </motion.div>

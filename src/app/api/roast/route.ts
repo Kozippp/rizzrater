@@ -7,7 +7,7 @@ export async function POST(req: Request) {
 
     if (!pickupLine) {
       return NextResponse.json(
-        { error: "Please provide a pickup line to be judged." },
+        { error: "Palun sisesta midagi, mida ma saaksin analüüsida." },
         { status: 400 }
       );
     }
@@ -16,13 +16,11 @@ export async function POST(req: Request) {
 
     if (!apiKey) {
       // For demo purposes, if no key is present, we return a mock response
-      // so the UI can be tested without a key immediately.
-      // In production, this should return a 500 error.
       console.warn("OPENAI_API_KEY is missing. Using mock response.");
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Fake delay
       return NextResponse.json({
-        roast: "I would roast you, but the developer forgot to give me my brain (API Key missing). Just know that your line was probably terrible anyway.",
-        score: -1
+        roast: "Muidugi, see on väga huvitav lähenemine! Aga olgem ausad, isegi mu vanaema kirjutaks paremat koodi kui see tekst siin. See on nii igav, et ma peaaegu lülitasin end välja. Palun proovi uuesti, kui oled midagi originaalset välja mõelnud.",
+        score: -5
       });
     }
 
@@ -33,14 +31,13 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content: `You are Velvet, a cynical, heartbroken, dark romantic goth AI. 
-          A user will submit a pickup line. Your job is to destroy their ego. 
-          Roast them on how cliché, desperate, or cringy the line is. 
-          Be witty, mean, and eloquent. Use dark romantic metaphors if suitable.
+          content: `Oled eestikeelne AI. Sinu ülesanne on kasutaja sisendit hinnata.
+          Alguses tundu nagu viisakas, professionaalne ja abivalmis abiline ("Muidugi, ma vaatan seda...", "Huvitav küsimus...", "Väga hea mõte..."), aga siis muutu järsult ja "roasti" kasutajat täiega. 
+          Ütle talle, kui halb, igav, klišee või loll tema tekst on. Ole vaimukas, terav ja ära hoia end tagasi.
           
-          Return your response in strictly VALID JSON format with the following keys:
-          - "roast": The text of your roast (max 2 sentences).
-          - "score": A score from -10 to 10 based on quality (usually low).`
+          Vasta rangelt JSON formaadis järgmiste väljadega:
+          - "roast": Sinu vastus (algab viisakalt, läheb kiiresti salvavaks). Max 3-4 lauset.
+          - "score": Hinnang skaalal -10 kuni 10 (enamasti madal, sest sa oled kriitiline).`
         },
         {
           role: "user",
@@ -61,7 +58,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Error in roast API:", error);
     return NextResponse.json(
-      { error: "Something went wrong. Even I am speechless." },
+      { error: "Midagi läks valesti. Isegi mina ei oska seda selgitada." },
       { status: 500 }
     );
   }

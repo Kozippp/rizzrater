@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-  title: "Velvet Roast | Pickup Line Judge",
-  description: "A dark, romantic AI that judges your pickup lines.",
+  title: "AI Abiline | Sinu Isiklik Nõustaja",
+  description: "Tark tehisintellekt, mis aitab sind igapäevastes küsimustes.",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="et" className="dark">
       <body className={cn(inter.variable, playfair.variable, "font-sans antialiased bg-background text-foreground min-h-screen")}>
         {children}
       </body>

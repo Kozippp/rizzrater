@@ -2,12 +2,11 @@ import { RoastForm } from "@/components/RoastForm";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden">
-      {/* Background Layer - Fixed position, no pointer events */}
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden bg-background">
+      {/* Background Layer - Clean and Modern */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[140px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] opacity-70" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] brightness-100 contrast-150 mix-blend-overlay"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px]" />
       </div>
 
       {/* Main Content Layer */}
@@ -16,8 +15,8 @@ export default function Home() {
       </div>
       
       {/* Footer Layer */}
-      <footer className="fixed bottom-6 left-1/2 -translate-x-1/2 text-sm text-gray-500/70 z-0 pointer-events-none">
-        <p className="font-light tracking-wide">Built for the heartbroken. Powered by AI.</p>
+      <footer className="fixed bottom-6 left-1/2 -translate-x-1/2 text-sm text-gray-400 z-0 pointer-events-none">
+        <p className="font-light tracking-wide">Sinu usaldusväärne AI abiline</p>
       </footer>
     </main>
   );

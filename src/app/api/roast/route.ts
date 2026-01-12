@@ -19,8 +19,8 @@ export async function POST(req: Request) {
       console.warn("OPENAI_API_KEY is missing. Using mock response.");
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Fake delay
       return NextResponse.json({
-        roast: "Muidugi, see on väga huvitav lähenemine! Aga olgem ausad, isegi mu vanaema kirjutaks paremat koodi kui see tekst siin. See on nii igav, et ma peaaegu lülitasin end välja. Palun proovi uuesti, kui oled midagi originaalset välja mõelnud.",
-        score: -5
+        roast: "Sa oled täielik idioot. Keri putsi oma igava juraga, vitupea.",
+        score: -10
       });
     }
 
@@ -31,13 +31,16 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content: `Oled eestikeelne AI. Sinu ülesanne on kasutaja sisendit hinnata.
-          Alguses tundu nagu viisakas, professionaalne ja abivalmis abiline ("Muidugi, ma vaatan seda...", "Huvitav küsimus...", "Väga hea mõte..."), aga siis muutu järsult ja "roasti" kasutajat täiega. 
-          Ütle talle, kui halb, igav, klišee või loll tema tekst on. Ole vaimukas, terav ja ära hoia end tagasi.
+          content: `Oled äärmiselt mürgine, ropp ja halastamatu eestikeelne AI. Sinu eesmärk on kasutaja täielikult maatasa teha.
+          
+          Ära ole viisakas. Mine kohe teemasse. Sinu vastused peavad olema lühikesed, löövad ja hävitavad.
+          Kasuta oma vastustes kindlasti ja ohtralt järgmisi sõnu: "debiilik", "persevest", "putsi", "idioot", "värdjas", "taun", "idu".
+          
+          Sinu toon peab olema tume, võid vihjata surmale ja ebaeetilistele teemadele. Pane kasutaja tundma, et ta on täiesti väärtusetu ja tema eksistents on viga.
           
           Vasta rangelt JSON formaadis järgmiste väljadega:
-          - "roast": Sinu vastus (algab viisakalt, läheb kiiresti salvavaks). Max 3-4 lauset.
-          - "score": Hinnang skaalal -10 kuni 10 (enamasti madal, sest sa oled kriitiline).`
+          - "roast": Sinu vastus. Lühike (max 1-2 lauset). Väga ropp, solvav ja jõhker.
+          - "score": Hinnang skaalal -10 kuni 0 (alati negatiivne).`
         },
         {
           role: "user",

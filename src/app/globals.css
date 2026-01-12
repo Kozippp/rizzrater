@@ -2,37 +2,37 @@
 
 @layer base {
   :root {
-    /* Modern Dark Theme (Zinc/Slate base) */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Romantic Dark Theme (Rose/Red base) */
+    --background: 345 10% 4%; /* Dark Rose Tinted Black */
+    --foreground: 350 20% 98%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 345 10% 4%;
+    --card-foreground: 350 20% 98%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 345 10% 4%;
+    --popover-foreground: 350 20% 98%;
 
-    /* Vibrant Blue/Indigo Primary */
-    --primary: 252 59% 48%; /* Modern Indigo */
-    --primary-foreground: 0 0% 98%;
+    /* Passionate Red/Pink Primary */
+    --primary: 346 84% 61%; /* Hot Pink / Rose */
+    --primary-foreground: 355 100% 97%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 340 10% 12%;
+    --secondary-foreground: 350 20% 98%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 340 10% 12%;
+    --muted-foreground: 340 10% 70%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 340 15% 15%;
+    --accent-foreground: 350 20% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 340 20% 15%;
+    --input: 340 20% 15%;
+    --ring: 346 84% 61%;
 
-    --radius: 0.75rem;
+    --radius: 1rem; /* Softer, rounder corners for friendly vibe */
   }
 }
 
@@ -95,11 +95,11 @@
 
 /* Custom Utilities for Modern Gradients and Glassmorphism */
 .glass-panel {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+  @apply bg-rose-950/20 backdrop-blur-xl border border-rose-500/10 shadow-2xl;
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-rose-500 to-red-500;
 }
 
 /* Subtle background animation */

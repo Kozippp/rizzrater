@@ -1,4 +1,5 @@
 import { RoastForm } from "@/components/RoastForm";
+import { FlyingMessages } from "@/components/FlyingMessages";
 
 export default function Home() {
   return (
@@ -16,6 +17,8 @@ export default function Home() {
         {/* Noise Texture */}
         <div className="absolute inset-0 bg-noise opacity-[0.04] pointer-events-none"></div>
       </div>
+
+      <FlyingMessages />
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-4xl flex flex-col items-center gap-12">

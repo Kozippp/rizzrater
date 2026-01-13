@@ -67,8 +67,7 @@ export function RoastForm() {
         </h1>
         
         <p className="text-lg text-pink-200/70 font-light max-w-lg mx-auto leading-relaxed">
-          Kas sinu lantimislause töötab või jääd sa igaveseks üksikuks? 
-          Lase armastuse eksperdil hinnata.
+          Analüüsin sinu pickup line'i, et seda paremaks muuta!
         </p>
       </motion.div>
 

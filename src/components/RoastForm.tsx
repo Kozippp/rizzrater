@@ -71,47 +71,7 @@ export function RoastForm() {
         </p>
       </motion.div>
 
-      {/* INPUT SECTION */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <Card className="glass-panel border-0 overflow-hidden ring-1 ring-rose-500/20 shadow-[0_8px_32px_rgba(244,63,94,0.1)]">
-          <CardContent className="p-1">
-            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 p-2">
-              <div className="relative flex-grow group">
-                <Input
-                  placeholder="Sisesta oma parim lantimislause..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  className="h-14 px-6 text-lg bg-black/40 border-transparent focus:border-rose-500/50 text-white placeholder:text-pink-200/30 rounded-xl transition-all focus:bg-black/60 focus-visible:ring-0 focus-visible:ring-offset-0 selection:bg-rose-500/30"
-                  autoComplete="off"
-                  autoFocus
-                />
-              </div>
-              
-              <Button
-                type="submit"
-                size="lg"
-                className="h-14 px-8 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-lg font-bold rounded-xl shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 border-t border-white/10"
-                disabled={loading || !input.trim()}
-              >
-                {loading ? (
-                  <Loader2 className="w-6 h-6 animate-spin text-white" />
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <span>Hinda</span>
-                    <Sparkles className="w-5 h-5 fill-white/20" />
-                  </div>
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      {/* RESULT SECTION */}
+      {/* RESULT SECTION - Moved above Input */}
       <AnimatePresence mode="wait">
         {result && (
           <motion.div
@@ -184,6 +144,47 @@ export function RoastForm() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* INPUT SECTION - Moved to bottom */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <Card className="glass-panel border-0 overflow-hidden ring-1 ring-rose-500/20 shadow-[0_8px_32px_rgba(244,63,94,0.1)]">
+          <CardContent className="p-1">
+            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 p-2">
+              <div className="relative flex-grow group">
+                <Input
+                  placeholder="Sisesta oma parim lantimislause..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  className="h-14 px-6 text-lg bg-black/40 border-transparent focus:border-rose-500/50 text-white placeholder:text-pink-200/30 rounded-xl transition-all focus:bg-black/60 focus-visible:ring-0 focus-visible:ring-offset-0 selection:bg-rose-500/30"
+                  autoComplete="off"
+                  autoFocus
+                />
+              </div>
+              
+              <Button
+                type="submit"
+                size="lg"
+                className="h-14 px-8 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-lg font-bold rounded-xl shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 border-t border-white/10"
+                disabled={loading || !input.trim()}
+              >
+                {loading ? (
+                  <Loader2 className="w-6 h-6 animate-spin text-white" />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <span>Hinda</span>
+                    <Sparkles className="w-5 h-5 fill-white/20" />
+                  </div>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </motion.div>
+
     </div>
   )
 }

@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Heart, Sparkles, SendHorizontal, Loader2, Star, Flame } from "lucide-react"
+import { Heart, Sparkles, SendHorizontal, Loader2, Star, Flame, Calculator, Zap, Scan } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,6 +11,82 @@ type RoastResponse = {
   roast: string
   score: number
   error?: string
+}
+
+function ProcessingAnimation() {
+  const [score, setScore] = useState(5.0)
+  const [phase, setPhase] = useState(0)
+  
+  const phases = [
+    { text: "Skaneerin lantimislauset...", icon: Scan },
+    { text: "Arvutan Rizz taset...", icon: Calculator },
+    { text: "Konsulteerin Cupidoga...", icon: Heart },
+    { text: "Genereerin hinnangut...", icon: Zap },
+  ]
+
+  useEffect(() => {
+    const scoreInterval = setInterval(() => {
+      setScore(Math.random() * 10)
+    }, 50)
+
+    const phaseInterval = setInterval(() => {
+      setPhase((p) => (p + 1) % phases.length)
+    }, 800)
+
+    return () => {
+      clearInterval(scoreInterval)
+      clearInterval(phaseInterval)
+    }
+  }, [])
+
+  const CurrentIcon = phases[phase].icon
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+      className="glass-panel rounded-3xl p-8 md:p-12 text-center relative overflow-hidden border border-rose-500/20 my-4"
+    >
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-rose-500/10 rounded-full blur-[100px] animate-pulse" />
+      
+      <div className="relative z-10 flex flex-col items-center gap-8">
+        <div className="relative">
+          <div className="absolute inset-0 animate-ping opacity-20 bg-rose-500 rounded-full" />
+          <div className="w-20 h-20 rounded-full bg-black/40 border border-rose-500/30 flex items-center justify-center backdrop-blur-md">
+            <CurrentIcon className="w-10 h-10 text-rose-400" />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <motion.div 
+            key={phase}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="text-rose-200/80 font-mono text-sm uppercase tracking-widest"
+          >
+            {phases[phase].text}
+          </motion.div>
+          
+          <div className="flex items-center justify-center gap-1 font-mono text-5xl font-bold text-white tabular-nums tracking-tighter">
+            <span className="text-rose-500/50">&gt;</span>
+            {score.toFixed(1)}
+            <span className="animate-pulse text-rose-500">_</span>
+          </div>
+        </div>
+
+        <div className="w-full max-w-[200px] h-1 bg-gray-800 rounded-full overflow-hidden">
+          <motion.div 
+            className="h-full bg-gradient-to-r from-rose-600 to-pink-500"
+            animate={{ x: ["-100%", "100%"] }}
+            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+          />
+        </div>
+      </div>
+    </motion.div>
+  )
 }
 
 export function RoastForm() {
@@ -71,9 +147,11 @@ export function RoastForm() {
         </p>
       </motion.div>
 
-      {/* RESULT SECTION - Moved above Input */}
+      {/* RESULT / PROCESSING SECTION */}
       <AnimatePresence mode="wait">
-        {result && (
+        {loading ? (
+          <ProcessingAnimation key="processing" />
+        ) : result ? (
           <motion.div
             key="result"
             initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
@@ -142,10 +220,10 @@ export function RoastForm() {
               </div>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
 
-      {/* INPUT SECTION - Moved to bottom */}
+      {/* INPUT SECTION */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -171,14 +249,11 @@ export function RoastForm() {
                 className="h-14 px-8 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-lg font-bold rounded-xl shadow-[0_0_20px_rgba(225,29,72,0.4)] hover:shadow-[0_0_30px_rgba(225,29,72,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 border-t border-white/10"
                 disabled={loading || !input.trim()}
               >
-                {loading ? (
-                  <Loader2 className="w-6 h-6 animate-spin text-white" />
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <span>Hinda</span>
-                    <Sparkles className="w-5 h-5 fill-white/20" />
-                  </div>
-                )}
+                {/* Asendasin laadija tavalise nupuga, sest animatsioon on nüüd keskel */}
+                <div className="flex items-center gap-2">
+                  <span>Hinda</span>
+                  <Sparkles className="w-5 h-5 fill-white/20" />
+                </div>
               </Button>
             </form>
           </CardContent>

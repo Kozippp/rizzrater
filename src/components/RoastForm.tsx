@@ -166,14 +166,14 @@ export function RoastForm() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-rose-500/20 transition-all duration-700" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:bg-pink-500/20 transition-all duration-700" />
 
-              <div className="relative z-10 flex flex-col items-center gap-6">
+              <div className="relative z-10 flex flex-col items-center gap-2">
                 <div className="flex flex-col items-center gap-2">
                   <span className="text-xs font-mono uppercase tracking-widest text-pink-200/50 flex items-center gap-2">
                     <Flame className="w-3 h-3 text-orange-500" />
                     Rizz Score
                     <Flame className="w-3 h-3 text-orange-500" />
                   </span>
-                  <div className="flex items-end justify-center gap-2 my-4">
+                  <div className="flex items-end justify-center gap-2 mt-2 mb-0">
                     <motion.span
                       initial={{ scale: 0, y: 20 }}
                       animate={{ scale: 1, y: 0 }}
@@ -187,7 +187,7 @@ export function RoastForm() {
                   </div>
                 </div>
 
-                <div className="h-px w-full max-w-[200px] bg-gradient-to-r from-transparent via-rose-500/30 to-transparent my-4" />
+                <div className="h-px w-full max-w-[200px] bg-gradient-to-r from-transparent via-rose-500/30 to-transparent my-3" />
 
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}

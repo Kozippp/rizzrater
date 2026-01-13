@@ -173,37 +173,17 @@ export function RoastForm() {
                     Rizz Score
                     <Flame className="w-3 h-3 text-orange-500" />
                   </span>
-                  <div className="flex items-center justify-center relative my-2">
-                    <motion.div
-                      initial={{ scale: 0, rotate: -180 }}
-                      animate={{ scale: 1, rotate: 0 }}
+                  <div className="flex items-end justify-center gap-2 my-4">
+                    <motion.span
+                      initial={{ scale: 0, y: 20 }}
+                      animate={{ scale: 1, y: 0 }}
                       transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
-                      className={`text-8xl md:text-9xl font-black tracking-tighter ${getScoreColor(result.score)}`}
+                      className={`text-8xl md:text-9xl font-black tracking-tighter leading-none ${getScoreColor(result.score)}`}
                       style={{ textShadow: "0 0 40px currentColor" }}
                     >
                       {result.score}
-                    </motion.div>
-                    <span className="text-3xl text-pink-200/20 absolute -right-8 top-4 font-thin">/10</span>
-                  </div>
-                  
-                  {/* Heart Rating Visual */}
-                  <div className="flex gap-2 mt-2">
-                    {[...Array(10)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3 + (i * 0.05) }}
-                      >
-                        <Heart 
-                          className={`w-4 h-4 transition-colors duration-500 ${
-                            i < result.score 
-                              ? "fill-rose-500 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]" 
-                              : "text-rose-900/40"
-                          }`} 
-                        />
-                      </motion.div>
-                    ))}
+                    </motion.span>
+                    <span className="text-4xl md:text-5xl font-bold text-pink-200/30 mb-2 md:mb-3">/10</span>
                   </div>
                 </div>
 
